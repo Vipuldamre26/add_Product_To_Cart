@@ -8,6 +8,9 @@ console.log(parent);
 
 var cart = [];
 
+
+
+// for page loading it will show all the products 
 window.onload = () => {
 
     prodList.forEach((prod) => {
@@ -32,6 +35,8 @@ window.onload = () => {
 }
 
 
+
+// by using event daligation we can add or sub products 
 document.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("add")) {
@@ -41,10 +46,11 @@ document.addEventListener("click", (e) => {
         let prodName = e.target.parentNode.parentNode.children[1].innerText;
         let prodPrice = e.target.parentElement.parentElement.children[2].innerText;
         let prodCount = e.target.parentElement.children[2].innerText;
-        console.log(prodPrice);
-        console.log(prodCount);
+        // console.log(prodPrice);
+        // console.log(prodCount);
 
         var existingProduct = cart.find(item => item.name === prodName);
+        console.log(existingProduct);
 
         if (existingProduct) {
             existingProduct.count++;
@@ -54,10 +60,10 @@ document.addEventListener("click", (e) => {
         }
 
         updateCart();
-        console.log(cart);
+        // console.log(cart);
 
         let childcount = e.target.parentElement.children[1];
-        console.log(childcount);
+        // console.log(childcount);
 
         // parseInt() convert string into integer
         let currentcount = parseInt(childcount.innerText);
@@ -68,7 +74,7 @@ document.addEventListener("click", (e) => {
 
     else if (e.target.classList.contains("sub")) {
         let prodName = e.target.parentNode.parentNode.children[1].innerText;
-        console.log(prodName);
+        // console.log(prodName);
 
         let index = cart.findIndex((prod) => prod.name === prodName)
 
