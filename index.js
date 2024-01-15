@@ -2,6 +2,8 @@
 
 let cartItems = document.querySelector(".cart-items");
 let parent = document.querySelector(".product-items");
+let noProd = document.querySelector(".no-prod");
+
 console.log(parent);
 
 var cart = [];
@@ -24,6 +26,7 @@ window.onload = () => {
         `
         item.classList.add("product");
         parent.appendChild(item);
+        noProd.style.display = "block";
     })
 
 }
@@ -33,7 +36,7 @@ document.addEventListener("click", (e) => {
 
     if (e.target.classList.contains("add")) {
 
-
+        noProd.style.display = "none";
         // two ways to access the tags by using event daligation
         let prodName = e.target.parentNode.parentNode.children[1].innerText;
         let prodPrice = e.target.parentElement.parentElement.children[2].innerText;
@@ -68,21 +71,25 @@ document.addEventListener("click", (e) => {
         console.log(prodName);
 
         let index = cart.findIndex((prod) => prod.name === prodName)
-        
-        if(index !== -1){
+
+        if (index !== -1) {
             let existingProduct = cart[index];
-            if(existingProduct.count > 1){
+            if (existingProduct.count > 1) {
                 existingProduct.count--;
             }
-            else{
+            else {
                 cart.splice(index, 1);
             }
         }
 
         let decreasecount = parseInt(e.target.parentElement.children[1].innerText);
-        if(decreasecount > 0){
+        if (decreasecount > 0) {
             let decrease = decreasecount - 1;
             e.target.parentElement.children[1].innerText = decrease;
+        }
+
+        if(cart.length < 1){
+            noProd.style.display = "block";
         }
 
         updateCart();
@@ -110,5 +117,6 @@ function updateCart() {
 
     totalEle.innerHTML = `Total : Rs. ${total}`;
 }
+
 
 
